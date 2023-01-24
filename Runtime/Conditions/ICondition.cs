@@ -1,6 +1,6 @@
 ﻿namespace StateMachineSystem.Runtime.Conditions
 {
-    internal interface ICondition
+    public interface ICondition
     {
         bool IsMet();
     }

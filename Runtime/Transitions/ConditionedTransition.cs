@@ -5,15 +5,13 @@ namespace StateMachineSystem.Runtime.Transitions
 {
     public class ConditionedTransition : ITransition
     {
-        public IState FromState { get; }
-        public IState ToState { get; }
+        private readonly ICondition[] _conditions;
+        private readonly IState _nextState;
 
-        private ICondition[] _conditions;
-
-        public ConditionedTransition(IState fromState, IState toState)
+        public ConditionedTransition(ICondition[] conditions, IState nextState)
         {
-            FromState = fromState;
-            ToState = toState;
+            _conditions = conditions;
+            _nextState = nextState;
         }
 
         bool ITransition.CanTransition()
@@ -24,6 +22,11 @@ namespace StateMachineSystem.Runtime.Transitions
             }
 
             return true;
+        }
+
+        IState ITransition.GetNextState()
+        {
+            return _nextState;
         }
     }
 }

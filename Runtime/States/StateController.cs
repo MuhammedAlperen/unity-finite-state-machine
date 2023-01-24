@@ -22,10 +22,9 @@ namespace StateMachineSystem.Runtime.States
 
             foreach (var transition in CurrentState.GetTransitions())
             {
-                if(transition.FromState != CurrentState) continue;
                 if (!transition.CanTransition()) continue;
 
-                SwitchState(transition.ToState);
+                SwitchState(transition.GetNextState());
             }
         }
 

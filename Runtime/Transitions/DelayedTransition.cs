@@ -5,19 +5,15 @@ namespace StateMachineSystem.Runtime.Transitions
 {
     public class DelayedTransition : ITransition
     {
-        public IState FromState { get; }
-        public IState ToState { get; }
-        
         private readonly ITimeController _timeController;
+        private readonly IState _nextState;
         private readonly float _delay;
         private float _elapsed;
 
-        public DelayedTransition(IState fromState, IState toState, ITimeController timeController, float delay)
+        public DelayedTransition(IState nextState, ITimeController timeController, float delay)
         {
-            FromState = fromState;
-            ToState = toState;
-
             _timeController = timeController;
+            _nextState = nextState;
             _delay = delay;
 
             _timeController.OnUpdate += OnUpdate;
@@ -31,6 +27,11 @@ namespace StateMachineSystem.Runtime.Transitions
         bool ITransition.CanTransition()
         {
             return _elapsed >= _delay;
+        }
+
+        IState ITransition.GetNextState()
+        {
+            return _nextState;
         }
 
         private void OnUpdate()

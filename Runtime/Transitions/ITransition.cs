@@ -4,9 +4,7 @@ namespace StateMachineSystem.Runtime.Transitions
 {
     public interface ITransition
     {
-        IState FromState { get; }
-        IState ToState { get; }
-
-        internal bool CanTransition();
+        protected internal bool CanTransition();
+        protected internal IState GetNextState();
     }
 }
