@@ -4,8 +4,8 @@ using FiniteStateMachine.Demo.Scripts.InputSystem;
 using FiniteStateMachine.Runtime.Conditions;
 using FiniteStateMachine.Runtime.States;
 using FiniteStateMachine.Runtime.Transitions;
+using TimeSystem.Runtime;
 using UnityEngine;
-using Utils.Runtime.TimeSystem;
 
 namespace FiniteStateMachine.Demo.Scripts
 {

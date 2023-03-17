@@ -1,9 +1,7 @@
 {
     "name": "StateMachineSystem.Runtime",
     "rootNamespace": "",
-    "references": [
-        "GUID:ab253404cff764f85a4417ff5c19e37d"
-    ],
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

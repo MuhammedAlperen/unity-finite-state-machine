@@ -1,7 +1,8 @@
+using FiniteStateMachine.Runtime.Conditions;
 using FiniteStateMachine.Runtime.States;
-using Utils.Runtime.TimeSystem;
+using TimeSystem.Runtime;
 
-namespace FiniteStateMachine.Runtime.Conditions
+namespace FiniteStateMachine.Demo.Scripts.CustomConditions
 {
     public class DelayCondition : ICondition
     {
