@@ -8,7 +8,7 @@ namespace FiniteStateMachine.Demo.Scripts
         [SerializeField] private float m_baseSpeed;
 
         private Vector3 _movementBuffer;
-        private float _speedMultiplier;
+        private float _speedMultiplier = 1f;
 
         private void FixedUpdate()
         {

@@ -20,8 +20,8 @@ namespace FiniteStateMachine.Demo.Scripts
 
             var idleState = new IdleState();
             var walkState = new WalkState(movementController, inputController);
-            var jumpState = new JumpState(movementController, 5f);
-            var crouchState = new CrouchState(movementController);
+            var jumpState = new JumpState(movementController, inputController, 5f);
+            var crouchState = new CrouchState(movementController, inputController);
 
             idleState.SetTransitions(new []
             {
@@ -38,17 +38,18 @@ namespace FiniteStateMachine.Demo.Scripts
             });
 
             const float jumpDuration = 1f;
-            var delayCondition = new DelayCondition(jumpState, UnityTimeManager.Instance, jumpDuration);
+            var delayCondition = new DelayCondition(jumpState, UnityTimeManager.Instance, jumpDuration); // TODO: Replace with IsGroundedCondition
             jumpState.SetTransitions(new []
             {
                 new ConditionedTransition(new ICondition[] { delayCondition, new InputCondition(inputController, InputCondition.InputType.Move, inverted: false) }, walkState),
                 new ConditionedTransition(new ICondition[] { delayCondition, new InputCondition(inputController, InputCondition.InputType.Move, inverted: true) }, idleState),
             });
 
+            var notCrouchedCondition = new InputCondition(inputController, InputCondition.InputType.Crouch, inverted: true);
             crouchState.SetTransitions(new []
             {
-                new ConditionedTransition(new ICondition[] { new InputCondition(inputController, InputCondition.InputType.Move, inverted: false) }, walkState),
-                new ConditionedTransition(new ICondition[] { new InputCondition(inputController, InputCondition.InputType.Move, inverted: true) }, idleState),
+                new ConditionedTransition(new ICondition[] { notCrouchedCondition, new InputCondition(inputController, InputCondition.InputType.Move, inverted: false) }, walkState),
+                new ConditionedTransition(new ICondition[] { notCrouchedCondition, new InputCondition(inputController, InputCondition.InputType.Move, inverted: true) }, idleState),
                 new ConditionedTransition(new ICondition[] { new InputCondition(inputController, InputCondition.InputType.Jump) }, jumpState),
             });
 

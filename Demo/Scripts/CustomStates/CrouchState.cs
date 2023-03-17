@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
+using FiniteStateMachine.Demo.Scripts.InputSystem;
 using FiniteStateMachine.Runtime.States;
 using FiniteStateMachine.Runtime.Transitions;
+using UnityEngine;
 
 namespace FiniteStateMachine.Demo.Scripts.CustomStates
 {
@@ -11,11 +13,13 @@ namespace FiniteStateMachine.Demo.Scripts.CustomStates
         public StateDelegate OnExited { get; set; }
 
         private readonly MovementController _movementController;
+        private readonly IInputController _inputController;
         private ITransition[] _transitions;
 
-        public CrouchState(MovementController movementController)
+        public CrouchState(MovementController movementController, IInputController inputController)
         {
             _movementController = movementController;
+            _inputController = inputController;
         }
 
         public void SetTransitions(IEnumerable<ITransition> transitions)
@@ -32,6 +36,12 @@ namespace FiniteStateMachine.Demo.Scripts.CustomStates
         {
             // _animationController.SetCrouch();
             _movementController.SetSpeedMultiplier(0.5f);
+        }
+
+        void IState.OnFixedUpdate(float fixedDeltaTime)
+        {
+            var moveVector = new Vector2(_inputController.GetMoveHorizontal(), _inputController.GetMoveVertical());
+            _movementController.Move(moveVector.normalized * fixedDeltaTime);
         }
 
         void IState.OnExit()

@@ -20,7 +20,6 @@ namespace FiniteStateMachine.Runtime.States
 
         public void Update(float deltaTime)
         {
-            Debug.Log("CurrentState: " + CurrentState.GetType().Name);
             CurrentState.Update(deltaTime);
 
             foreach (var transition in CurrentState.GetTransitions())
@@ -28,6 +27,7 @@ namespace FiniteStateMachine.Runtime.States
                 if (!transition.CanTransition()) continue;
 
                 SwitchState(transition.GetNextState());
+                break;
             }
         }
 
@@ -43,9 +43,10 @@ namespace FiniteStateMachine.Runtime.States
 
         private void SwitchState(IState newState)
         {
+            Debug.Log("Switching State: " + CurrentState.GetType().Name + " => " + newState.GetType().Name);
             CurrentState.Exit();
             CurrentState = newState;
-            CurrentState.OnEnter();
+            CurrentState.Enter();
         }
     }
 }

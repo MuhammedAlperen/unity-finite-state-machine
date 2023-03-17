@@ -38,10 +38,10 @@ namespace FiniteStateMachine.Demo.Scripts.CustomStates
             // _animationController.SetWalk();
         }
 
-        void IState.OnUpdate(float deltaTime)
+        void IState.OnFixedUpdate(float fixedDeltaTime)
         {
             var moveVector = new Vector2(_inputController.GetMoveHorizontal(), _inputController.GetMoveVertical());
-            _movementController.Move(moveVector.normalized * deltaTime);
+            _movementController.Move(moveVector.normalized * fixedDeltaTime);
         }
 
         void IState.OnExit()

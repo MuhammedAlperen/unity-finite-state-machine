@@ -10,12 +10,18 @@ namespace FiniteStateMachine.Demo.Scripts.InputSystem
 
         public float GetMoveHorizontal()
         {
-            return Input.GetAxis("Horizontal");
+            var horizontalInput = 0;
+            if (Input.GetKey(KeyCode.A)) horizontalInput += -1;
+            if (Input.GetKey(KeyCode.D)) horizontalInput += 1;
+            return horizontalInput;
         }
 
         public float GetMoveVertical()
         {
-            return Input.GetAxis("Vertical");
+            var verticalInput = 0;
+            if (Input.GetKey(KeyCode.W)) verticalInput += 1;
+            if (Input.GetKey(KeyCode.S)) verticalInput += -1;
+            return verticalInput;
         }
     }
 }
