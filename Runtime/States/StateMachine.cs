@@ -1,9 +1,13 @@
-﻿using StateMachineSystem.Runtime.Transitions;
+﻿using System.Collections.Generic;
+using FiniteStateMachine.Runtime.Transitions;
 
-namespace StateMachineSystem.Runtime.States
+namespace FiniteStateMachine.Runtime.States
 {
     public class StateMachine : StateController, IState
     {
+        public StateDelegate OnEntered { get; set; }
+        public StateDelegate OnExited { get; set; }
+
         private ITransition[] Transitions { get; }
 
 
@@ -12,11 +16,28 @@ namespace StateMachineSystem.Runtime.States
             Transitions = transitions;
         }
 
-        ITransition[] IState.GetTransitions() => Transitions;
+        IEnumerable<ITransition> IState.GetTransitions() => Transitions;
 
-        void IState.OnEnter() => Enter();
-        void IState.OnUpdate(float deltaTime) => Update(deltaTime);
-        void IState.OnFixedUpdate(float fixedDeltaTime) => FixedUpdate(fixedDeltaTime);
-        void IState.OnExit() => Exit();
+        void IState.Enter()
+        {
+            Enter();
+            OnEntered?.Invoke();
+        }
+
+        void IState.Update(float deltaTime)
+        {
+            Update(deltaTime);
+        }
+
+        void IState.FixedUpdate(float fixedDeltaTime)
+        {
+            FixedUpdate(fixedDeltaTime);
+        }
+
+        void IState.Exit()
+        {
+            Exit();
+            OnExited?.Invoke();
+        }
     }
 }

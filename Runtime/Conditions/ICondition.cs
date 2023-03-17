@@ -1,4 +1,4 @@
-﻿namespace StateMachineSystem.Runtime.Conditions
+﻿namespace FiniteStateMachine.Runtime.Conditions
 {
     public interface ICondition
     {

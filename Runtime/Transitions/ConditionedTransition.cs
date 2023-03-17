@@ -1,7 +1,7 @@
-﻿using StateMachineSystem.Runtime.Conditions;
-using StateMachineSystem.Runtime.States;
+﻿using FiniteStateMachine.Runtime.Conditions;
+using FiniteStateMachine.Runtime.States;
 
-namespace StateMachineSystem.Runtime.Transitions
+namespace FiniteStateMachine.Runtime.Transitions
 {
     public class ConditionedTransition : ITransition
     {

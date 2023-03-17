@@ -1,6 +1,6 @@
-﻿using StateMachineSystem.Runtime.States;
+﻿using FiniteStateMachine.Runtime.States;
 
-namespace StateMachineSystem.Runtime.Transitions
+namespace FiniteStateMachine.Runtime.Transitions
 {
     public interface ITransition
     {

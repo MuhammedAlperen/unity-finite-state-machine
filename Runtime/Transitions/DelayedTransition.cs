@@ -1,7 +1,7 @@
-﻿using StateMachineSystem.Runtime.States;
-using TimeSystem.Runtime;
+﻿using FiniteStateMachine.Runtime.States;
+using Utils.Runtime.TimeSystem;
 
-namespace StateMachineSystem.Runtime.Transitions
+namespace FiniteStateMachine.Runtime.Transitions
 {
     public class DelayedTransition : ITransition
     {
@@ -18,7 +18,7 @@ namespace StateMachineSystem.Runtime.Transitions
 
             _timeController.OnUpdate += OnUpdate;
         }
-        
+
         ~DelayedTransition()
         {
             _timeController.OnUpdate -= OnUpdate;

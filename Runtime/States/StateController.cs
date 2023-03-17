@@ -1,4 +1,6 @@
-namespace StateMachineSystem.Runtime.States
+using UnityEngine;
+
+namespace FiniteStateMachine.Runtime.States
 {
     public class StateController
     {
@@ -13,12 +15,13 @@ namespace StateMachineSystem.Runtime.States
         public void Enter()
         {
             CurrentState = InitialState;
-            CurrentState.OnEnter();
+            CurrentState.Enter();
         }
 
         public void Update(float deltaTime)
         {
-            CurrentState.OnUpdate(deltaTime);
+            Debug.Log("CurrentState: " + CurrentState.GetType().Name);
+            CurrentState.Update(deltaTime);
 
             foreach (var transition in CurrentState.GetTransitions())
             {
@@ -30,17 +33,17 @@ namespace StateMachineSystem.Runtime.States
 
         public void FixedUpdate(float fixedDeltaTime)
         {
-            CurrentState.OnFixedUpdate(fixedDeltaTime);
+            CurrentState.FixedUpdate(fixedDeltaTime);
         }
 
         public void Exit()
         {
-            CurrentState.OnExit();
+            CurrentState.Exit();
         }
 
         private void SwitchState(IState newState)
         {
-            CurrentState.OnExit();
+            CurrentState.Exit();
             CurrentState = newState;
             CurrentState.OnEnter();
         }

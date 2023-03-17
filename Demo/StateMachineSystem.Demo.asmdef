@@ -2,7 +2,8 @@
     "name": "StateMachineSystem.Demo",
     "rootNamespace": "",
     "references": [
-        "GUID:a518bf5beeca47c4bdafdf7956147f25"
+        "GUID:a518bf5beeca47c4bdafdf7956147f25",
+        "GUID:ab253404cff764f85a4417ff5c19e37d"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
